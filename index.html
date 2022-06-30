@@ -17,9 +17,14 @@
             padding: 1rem 2rem;
         }
 
-        thead {
+        .table > thead {
             position: sticky;
             top: 0;
+            border-bottom: 2px solid;
+        }
+
+        .table > tbody:not(:first-child) {
+            border-top: none;
         }
 
         tr {
@@ -61,40 +66,96 @@
             font-style: italic;
         }
 
+        input.form-check-input:focus {
+            box-shadow: none;
+        }
+
+        .form-check-input:checked {
+            background-color: darkorange;
+            border-color: darkorange;
+        }
+
+        .form-check-input[type="checkbox"] {
+            border-radius: 0;
+        }
+
     </style>
 </head>
 
 <body>
 
-    <table class="table table-dark">
+    <div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="" id="filterbar">
+            <label class="form-check-label" for="filterbar">Bar</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="" id="filterreception">
+            <label class="form-check-label" for="filterreception">Reception</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="" id="filterglory">
+            <label class="form-check-label" for="filterglory">Glory</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="" id="filterstrip">
+            <label class="form-check-label" for="filterstrip">Strip</label>
+        </div>
+    </div>
+
+    <table id="titles" class="table table-dark mt-4">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
+                <th scope="col" style="width: 10%; min-width: 150px;">Id</th>
+                <th scope="col" style="width: 25%;">Name</th>
+                <th scope="col" style="width: 65%;">Description</th>
             </tr>
         </thead>
-
-        <tbody id="titles">
-            
-        </tbody>
     </table>
     
     <script>
 
         $(function () {
 
+            initTable();            
+        });
+
+        $(document).on('change', '.filter', filter);
+
+        function filter() {
+            
+            var currentFilter = $(this).prop('id');            
+            $(`.filter:not(#${currentFilter})`).prop('checked', false);
+            
+            $('tbody').show();
+
+            if ($(this).is(':checked')) {
+                
+                $('tbody')
+                    .filter(function () {
+
+                        let categories = $(this).data('categories');
+                        return !categories || !categories.includes(currentFilter.replace('filter', ''));
+                    })
+                    .hide();
+            }
+            
+        }
+
+        function initTable() {
+
             $.each(titles, function (iTitle, title) {
 
                 var row = `
-                    <tr>
-                        <td>${title.id}</td>
-                        <td class="title-name">${title.name}</td>
-                        <td>${title.description}</td>
-                    </tr>
-                    <tr class="passive-tr">
-                        <td>Passive(s)</td>
-                        <td colspan="2">`;
+                    <tbody data-categories="${title.categories.toString()}">
+                        <tr>
+                            <td>${title.id}</td>
+                            <td class="title-name">${title.name}</td>
+                            <td>${title.description}</td>
+                        </tr>
+                        <tr class="passive-tr">
+                            <td>Passives</td>
+                            <td colspan="2">`;
 
                 var passives = '';
 
@@ -112,7 +173,7 @@
                         </td>
                     </tr>
                     <tr class="active-tr">
-                        <td>Equip Effect(s)</td>
+                        <td>Equip Effects</td>
                         <td colspan="2">`;
 
                 var actives = '';
@@ -128,12 +189,13 @@
 
                 row += actives;
                 row += `
-                        </td>
-                    </tr>`;
+                            </td>
+                        </tr>
+                    </tbody>`;
 
                 $('#titles').append(row);
             });
-        });
+        }
 
     </script>
 
