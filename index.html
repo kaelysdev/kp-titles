@@ -149,8 +149,10 @@
 
             $.each(titles, function (iTitle, title) {
 
+                
+
                 var row = `
-                    <tbody data-categories="${title.categories.toString()}">
+                    <tbody data-categories="${title.categories ? title.categories.toString() : ''}">
                         <tr>
                             <td>${title.id}</td>
                             <td class="title-name">${title.name}</td>
