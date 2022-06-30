@@ -137,7 +137,7 @@
                 $('tbody')
                     .filter(function () {
 
-                        let categories = $(this).data('categories');
+                        let categories = $(this).attr('categories');
                         return !categories || !categories.includes(currentFilter.replace('filter', ''));
                     })
                     .hide();
@@ -149,10 +149,8 @@
 
             $.each(titles, function (iTitle, title) {
 
-                
-
                 var row = `
-                    <tbody data-categories="${title.categories ? title.categories.toString() : ''}">
+                    <tbody categories="${title.categories ? title.categories.toString() : ''}">
                         <tr>
                             <td>${title.id}</td>
                             <td class="title-name">${title.name}</td>
