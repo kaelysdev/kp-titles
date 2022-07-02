@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>Karryn's Prison - Title tracker - v.1.0.6</title>
+    <title>Karryn's Prison - Title tracker</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -38,8 +38,9 @@
             border-top: none;
         }
 
-        tr {
+        tr, td {
             border-color: lightslategray;
+            background-color: transparent !important;
         }
 
         tr.passive-tr > td {
@@ -52,11 +53,11 @@
             padding-top: 0;
         }
 
-        tr:not(.active-tr) > td {
+        tr:not(.active-tr) > td:not(.border-bottom-td) {
             border: none;
         }
 
-        tr:not(.active-tr) {
+        tr:not(.border-bottom-tr) {
             border: none;
         }
 
@@ -69,6 +70,14 @@
         .dark .debuff { color: rgb(255, 80, 80); }
         .dark .special-case { color: violet; }
         .dark .activation-case { font-style: italic; color: yellow; }
+
+        .claimed-bg {
+            background: linear-gradient(90deg, rgba(0, 255, 0, 0.20) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 85%, rgba(0, 255, 0, 0.20) 100%);
+        }
+
+        .unclaimable-bg {
+            background: linear-gradient(90deg, rgba(255, 80, 80, 0.20) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 85%, rgba(255, 80, 80, 0.20) 100%);
+        }
 
         input.form-check-input:focus,
         .form-control:focus {
@@ -84,8 +93,14 @@
         }
 
         .form-check-input:checked {
-            background-color: darkorange;
-            border-color: darkorange;
+            background-color: teal;
+            border-color: teal;
+        }
+
+        .dark .form-check-input:checked {   
+            background-color: darkcyan;
+            border-color: darkcyan;         
+            /* border-color: var(--bs-light); */
         }
 
         .modal {
@@ -116,9 +131,11 @@
             color: var(--bs-light);
         }
 
-        .dark .form-control {
+        .dark .form-control,
+        .dark .form-check-input {
             background-color: var(--bs-dark);
             color: var(--bs-light);
+            border-color: var(--bs-light)
         }
 
         mark {
@@ -216,13 +233,19 @@
 
         var isAdultKey = 'kp-title-is-adult';
         var isDarkThemeKey = 'kp-title-is-dark-theme';
-        var save;
+        var saveKey = 'kp-title-save';
+        var jsonSave;
 
         $(function () {
 
             isAdult();
             isDarkTheme();
-            initTable();            
+            initTable();
+            prepareSave();
+            initClaimed();
+
+            $('.filter').prop('checked', false);
+            $('#search').val('');
 
             $('#filteredCount').text(titles.length);
             $('#totalCount').text(titles.length);
@@ -230,31 +253,45 @@
             $(document).on('change', '.filter', filter);
             $(document).on('input propertychange paste', '#search', filter);
             $(document).on('click', '.toggle-mode', toggleMode);
+            $(document).on('change', '.claimed', claimed);
+            $(document).on('change', '.claimed-option', claimedOption);
         });
 
         function isAdult() {
 
             var lsIsAdult = window.localStorage.getItem(isAdultKey);
 
-            if (!lsIsAdult) {
-
+            if (!lsIsAdult)
                 new bootstrap.Modal(document.getElementById('adultModal')).show();
-            }
         }
 
         function isDarkTheme() {
 
             var lsIsDarkTheme = window.localStorage.getItem(isDarkThemeKey);
 
-            if (lsIsDarkTheme) {
-
+            if (lsIsDarkTheme)
                 toggleMode();
-            }
         }
 
         function isAdultConfirmed() {
 
             window.localStorage.setItem(isAdultKey, true);
+        }
+
+        function prepareSave() {
+
+            var lsSave = window.localStorage.getItem(saveKey);
+
+            if (lsSave)
+                jsonSave = JSON.parse(lsSave);
+            else
+                jsonSave = {};
+        }
+
+        function save() {
+
+            if (save)
+                window.localStorage.setItem(saveKey, JSON.stringify(jsonSave));
         }
 
         function toggleMode() {
@@ -316,15 +353,131 @@
             $('#filteredCount').text($('tbody:visible').length);
         }
 
+        function claimed() {
+
+            var titleId = $(this).prop('id').replace('claimed', '');
+
+            if ($(this).is(':checked')) {
+
+                $(this).parent().parent().parent().addClass('claimed-bg');
+
+                jsonSave[titleId] = true;
+                save();
+            }
+            else {
+
+                $(this).parent().parent().parent().removeClass('claimed-bg');
+                
+                jsonSave[titleId] = false;
+                save();
+            }
+        }
+
+        function claimedOption() {
+
+            var titleId = $(this).prop('id').replace('claimedOption', '');                
+            var notOptions = $(`.claimed-option:not(#${$(this).prop('id')})`);
+            var notOptionIds = [];
+            
+            $.each(notOptions, function (iNotOption, notOption) {
+
+                notOptionIds.push($(notOption).prop('id').replace('claimedOption', ''));
+            });
+            
+            notOptions
+                .prop('checked', false)
+                .parent().parent().parent().removeClass('claimed-bg').addClass('unclaimable-bg');
+
+            $(this).parent().parent().parent().removeClass('unclaimable-bg').addClass('claimed-bg');
+
+            jsonSave[titleId] = true;
+
+            $.each(notOptionIds, function (iId, id) {
+
+                jsonSave[id] = false;
+            });
+
+            save();
+        }
+
+        function initClaimed() {
+
+            var optionChecked = false;
+
+            $.each($('.claimed-td'), function (iClaimed, claimed) {
+
+                $(this).parent().parent().removeClass('claimed-bg');
+
+                var titleId = $(this).data('id');
+
+                if (titleId >= 6 && titleId <= 11) {
+
+                    var radio = $(this).find('input');
+
+                    if (jsonSave) {
+
+                        var savedValue = jsonSave[titleId];
+
+                        if (savedValue)
+                            $(radio).prop('checked', true);
+                    }
+
+                    if (radio.is(':checked')) {
+
+                        $(this).parent().parent().addClass('claimed-bg');
+                        
+                        optionChecked = true;
+                    }
+                }
+                else{
+
+                    var checkbox = $(this).find('input');
+
+                    if (jsonSave) {
+
+                        var savedValue = jsonSave[titleId];
+
+                        if (savedValue)
+                            $(checkbox).prop('checked', true);
+                    }
+
+                    if (checkbox.is(':checked'))
+                        $(this).parent().parent().addClass('claimed-bg');
+                }
+            });
+
+            if (optionChecked) {
+
+                var notOptions = $(`.claimed-option:not(:checked)`).parent().parent().parent().addClass('unclaimable-bg');
+            }
+        }
+
         function initTable() {
 
             $.each(titles, function (iTitle, title) {
 
                 var row = `
                     <tbody data-categories="${title.categories ? title.categories.toString() : ''}">
-                        <tr>
-                            <td>${title.id}</td>
-                            <td class="title-name search-name">${title.name}</td>
+                        <tr>`;
+
+                if (title.id >= 6 && title.id <= 11) {
+
+                    row += `
+                            <td rowspan="3" class="align-middle text-center border-bottom-td claimed-td" style="min-width: 45px; width: 45px;" data-id="${title.id}">
+                                <input class="form-check-input claimed-option" type="radio" name="option" value="" id="claimedOption${title.id}">
+                            </td>`;
+                }
+                else {
+
+                    row += `
+                            <td rowspan="3" class="align-middle text-center border-bottom-td claimed-td" style="min-width: 45px; width: 45px;" data-id="${title.id}">
+                                <input class="form-check-input claimed" type="checkbox" value="" id="claimed${title.id}"${title.id === 2 || title.id === 3 ? ' checked disabled' : ''}>
+                            </td>`;
+                }
+                        
+                row += `
+                            <td style="min-width: 150px; width: 150px;">${title.id}</td>
+                            <td class="title-name search-name" style="min-width: 350px; width: 350px;">${title.name}</td>
                             <td class="search-description">${title.description}</td>
                         </tr>
                         <tr class="passive-tr">
@@ -337,18 +490,18 @@
 
                     if (iPassive > 0) passives += '<span class="ms-4">';
 
-                    passives +=  passive;
+                    passives += passive;
 
                     if (iPassive > 0) passives += '</span>';
                 });
 
                 row += passives;
                 row += `
-                        </td>
-                    </tr>
-                    <tr class="active-tr">
-                        <td>Equip Effects</td>
-                        <td class="search-actives" colspan="2">`;
+                            </td>
+                        </tr>
+                        <tr class="active-tr border-bottom-tr">
+                            <td>Equip Effects</td>
+                            <td class="search-actives" colspan="2">`;
 
                 var actives = '';
 
