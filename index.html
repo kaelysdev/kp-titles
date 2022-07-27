@@ -61,11 +61,13 @@
             border: none;
         }
 
+        .orange { color: darkorange; }
         .buff { color: green; }
         .debuff { color: crimson; }
         .special-case { color: purple; }
         .activation-case { font-style: italic; color: orangered; }
 
+        .dark .orange { color: orange; }
         .dark .buff { color: lime; }
         .dark .debuff { color: rgb(255, 80, 80); }
         .dark .special-case { color: violet; }
@@ -217,7 +219,7 @@
         <button class="input-group-text clear-search"><i class="fas fa-eraser"></i></button>
     </div>
 
-    <div class="border-bottom px-2 mt-3"><span id="filteredCount"></span> / <span id="totalCount"></span> titles</div>
+    <div class="border-bottom px-2 mt-3"><span id="filteredClaimedCount" class="buff"></span> / <span id="filteredCount"></span> / <span id="totalCount"></span> titles</div>
 
     <table id="titles" class="table"></table>
 
@@ -262,6 +264,7 @@
         var isDarkThemeKey = 'kp-title-is-dark-theme';
         var saveKey = 'kp-title-save';
         var jsonSave;
+        var totalCount;
 
         $(function () {
 
@@ -274,8 +277,10 @@
             $('.filter').prop('checked', false);
             $('#search').val('');
 
-            $('#filteredCount').text(titles.length);
-            $('#totalCount').text(titles.length);
+            totalCount = titles.length;
+            $('#totalCount').text(totalCount);
+
+            updateCount();
 
             $(document).on('change', '.filter', filter);
             $(document).on('input propertychange paste', '#search', filter);
@@ -384,7 +389,7 @@
                     .hide();
             }
 
-            $('#filteredCount').text($('tbody:visible').length);
+            updateCount();
         }
 
         function claimed() {
@@ -405,6 +410,8 @@
                 jsonSave[titleId] = false;
                 save();
             }
+
+            updateCount();
         }
 
         function claimedOption() {
@@ -432,6 +439,21 @@
             });
 
             save();
+            updateCount();
+        }
+
+        function updateCount() {
+            
+            let filteredClaimed = $('.claimed:visible:checked, .claimed-option:visible:checked').length;
+            let filtered = $('tbody:visible').length;
+
+            $('#filteredClaimedCount').text(filteredClaimed);
+            $('#filteredCount').text(filtered);
+
+            if (filtered < totalCount)
+                $('#filteredCount').addClass('orange');
+            else
+                $('#filteredCount').removeClass('orange');
         }
 
         function initClaimed() {
