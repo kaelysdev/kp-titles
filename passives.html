@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Karryn's Prison titles & passives tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="main.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="passives.min.js"></script>
+    <script src="KP_Passives_1.1.0c2.js"></script>
+    
+</head>
+
+<body style="background-color: #212529;">
+
+    <div class="d-flex align-items-start justify-content-between">
+        <div class="d-flex flex-column">
+            <div class="d-flex align-items-end"><h3 class="mb-0">Karryn's Prison titles & passives tracker</h3></div>
+            <div class="small">v.1.1.0c2</div>            
+        </div>
+        <div class="d-flex justify-content-end">
+            <div class="d-flex">
+                <div class="pointer ms-4" data-bs-toggle="modal" data-bs-target="#aboutModal"><i class="far fa-circle-question fa-fw"></i> About</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-grow-1 mt-4">
+        <a class="h2 c3 m-0" href="index.html">Titles</a>
+        <span class="h2 m-0 ms-3">||</span>
+        <span class="h2 c27 m-0 ms-3">Passives</span>
+    </div>
+
+    <div class="mt-4">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="1,2,3,4" id="mouthcategory">
+            <label class="form-check-label" for="mouthcategory">Mouth</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="1" id="mouthdesire">
+            <label class="form-check-label" for="mouthdesire">Desire</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="2" id="mouth">
+            <label class="form-check-label" for="mouth">Mouth</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="3" id="kiss">
+            <label class="form-check-label" for="kiss">Kiss</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="4" id="blowjob">
+            <label class="form-check-label" for="blowjob">Blowjob</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="5,6,7,8" id="boobscategory">
+            <label class="form-check-label" for="boobscategory">Boobs</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="5" id="boobsdesire">
+            <label class="form-check-label" for="boobsdesire">Desire</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="6" id="boobs">
+            <label class="form-check-label" for="boobs">Boobs</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="7" id="nipples">
+            <label class="form-check-label" for="nipples">Nipples</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="8" id="tittyfuck">
+            <label class="form-check-label" for="tittyfuck">Titjob</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="9,10,11,12,13,14" id="pussycategory">
+            <label class="form-check-label" for="pussycategory">Pussy</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="9" id="pussydesire">
+            <label class="form-check-label" for="pussydesire">Desire</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="10" id="clit">
+            <label class="form-check-label" for="clit">Clit</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="11" id="pussy">
+            <label class="form-check-label" for="pussy">Pussy</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="12" id="wet">
+            <label class="form-check-label" for="wet">Wet</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="13" id="cunnilingus">
+            <label class="form-check-label" for="cunnilingus">Cunnilingus</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="14" id="vaginalsex">
+            <label class="form-check-label" for="vaginalsex">Vaginal Sex</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="15,16,17,18" id="buttcategory">
+            <label class="form-check-label" for="buttcategory">Butt</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="15" id="buttdesire">
+            <label class="form-check-label" for="buttdesire">Desire</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="16" id="butt">
+            <label class="form-check-label" for="butt">Butt</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="17" id="anal">
+            <label class="form-check-label" for="anal">Anal</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="18" id="analsex">
+            <label class="form-check-label" for="analsex">Titjob</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="19,20,21,22,23,24,25" id="cockcategory">
+            <label class="form-check-label" for="cockcategory">Cock</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="19" id="cockdesire">
+            <label class="form-check-label" for="cockdesire">Desire</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="20" id="worship">
+            <label class="form-check-label" for="worship">Worship</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="21" id="handjob">
+            <label class="form-check-label" for="handjob">Handjob</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="22" id="bukkake">
+            <label class="form-check-label" for="bukkake">Bukkake</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="23" id="swallow">
+            <label class="form-check-label" for="swallow">Swallow</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="24" id="creampie">
+            <label class="form-check-label" for="creampie">Creampie</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="25" id="relations">
+            <label class="form-check-label" for="relations">Relations</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="26,27,28,29,30,31" id="sadismcategory">
+            <label class="form-check-label" for="sadismcategory">Sadism</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="26" id="sadism">
+            <label class="form-check-label" for="sadism">Sadism</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="27" id="statut">
+            <label class="form-check-label" for="statut">Statut</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="28" id="skills">
+            <label class="form-check-label" for="skills">Skills</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="29" id="resist">
+            <label class="form-check-label" for="resist">Resist</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="30" id="footjob">
+            <label class="form-check-label" for="footjob">Footjob</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="31" id="dominance">
+            <label class="form-check-label" for="dominance">Dominance</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="32,33,34,35,36,37" id="masochismcategory">
+            <label class="form-check-label" for="masochismcategory">Masochism</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="32" id="masochism">
+            <label class="form-check-label" for="masochism">Masochism</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="33" id="talk">
+            <label class="form-check-label" for="talk">Talk</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="34" id="debuffs">
+            <label class="form-check-label" for="debuffs">Debuffs</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="35" id="rimjob">
+            <label class="form-check-label" for="rimjob">Rimjob</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="36" id="fetishism">
+            <label class="form-check-label" for="fetishism">Fetishism</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="37" id="submission">
+            <label class="form-check-label" for="submission">Submission</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="38,39,40,41,42" id="masturbationcategory">
+            <label class="form-check-label" for="masturbationcategory">Masturbation</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="38" id="masturbation">
+            <label class="form-check-label" for="masturbation">Masturbation</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="39" id="urges">
+            <label class="form-check-label" for="urges">Urges</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="40" id="sleep">
+            <label class="form-check-label" for="sleep">Sleep</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="41" id="toys">
+            <label class="form-check-label" for="toys">Toys</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="42" id="orgasm">
+            <label class="form-check-label" for="orgasm">Orgasm</label>
+        </div>
+    </div>
+
+    <div class="mt-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="43,44,45,46,47" id="exhibitionismcategory">
+            <label class="form-check-label" for="exhibitionismcategory">Exhibitionism</label><span class="ps-3">>></span>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="43" id="exhibitionism">
+            <label class="form-check-label" for="exhibitionism">Exhibitionism</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="44" id="sight">
+            <label class="form-check-label" for="sight">Sight</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="45" id="clothes">
+            <label class="form-check-label" for="clothes">Clothes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="46" id="nudity">
+            <label class="form-check-label" for="nudity">Nudity</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input filter" type="checkbox" value="47" id="activities">
+            <label class="form-check-label" for="activities">Activities</label>
+        </div>
+    </div>
+
+    <div class="input-group mt-4 search-wrapper">
+        <label class="input-group-text search" id="searchIcon" for="search"><i class="fas fa-magnifying-glass"></i></label>
+        <input id="search" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="searchIcon">
+        <button class="input-group-text clear-search"><i class="fas fa-eraser"></i></button>
+    </div>
+
+    <div class="border-bottom px-2 mt-4"><span id="filteredClaimedCount" class="buff"></span> / <span id="filteredCount"></span> / <span id="totalCount"></span> passives</div>
+
+    <table id="passives" class="table"></table>
+
+    <div class="modal fade" id="adultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>You must be legally adult in your country to use this website.</p>
+                    <p>This website uses your browser's local storage to store informations.<br />You accept this by pressing the "Continue" button.</p>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='https:\/\/www.google.com'">Leave</button>
+                        <button type="button" class="btn btn-danger" onclick="isAdultConfirmed()" data-bs-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>I am not affiliated with Karryn's Prison or Remtairy.</p>
+                    <p>I do not own anything related to Karryn's Prison or Remtairy.</p>
+                    <p>All data used for this page was generated by me from these game files:</p>
+                    <p>
+                        &nbsp;&nbsp;&nbsp;www/data/Armors.json<br />
+                        &nbsp;&nbsp;&nbsp;www/data/Skills.json<br />
+                        &nbsp;&nbsp;&nbsp;www/loc/RemDesc_EN.json<br />
+                        &nbsp;&nbsp;&nbsp;www/loc/RemEff.json
+                    </p>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Dismiss</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
