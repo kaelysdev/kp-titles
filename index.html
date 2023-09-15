@@ -24,6 +24,7 @@
         </div>
         <div class="d-flex justify-content-end">
             <div class="d-flex">
+                <div class="pointer ms-4" data-bs-toggle="modal" data-bs-target="#resetModal"><i class="fas fa-trash fa-fw text-danger"></i> Reset Titles</div>
                 <div class="pointer ms-4" data-bs-toggle="modal" data-bs-target="#aboutModal"><i class="far fa-circle-question fa-fw"></i> About</div>
             </div>
         </div>
@@ -107,6 +108,20 @@
                     <div class="d-flex justify-content-between mt-4">
                         <button type="button" class="btn btn-primary" onclick="window.location.href='https:\/\/www.google.com'">Leave</button>
                         <button type="button" class="btn btn-danger" onclick="isAdultConfirmed()" data-bs-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resetModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Are you sure you want to reset your titles?</p>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Do not reset</button>
+                        <button type="button" class="btn btn-danger ms-4" onclick="resetTitles()">Reset</button>
                     </div>
                 </div>
             </div>
